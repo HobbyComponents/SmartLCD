@@ -426,9 +426,6 @@ void SmartLCD::WaitBar(uint8_t Row, uint8_t Col, uint8_t Length, uint8_t Percent
 		}
 	}while(Scale >= 5);
 
-	uint8_t Pixel = 0x10;
-
-
 	/* For the last character block it may only be partially filled so use a
 	   custom character and draw the last filled columns within the character */
 	if(Scale)
