@@ -2,14 +2,14 @@
    DATE:    12/07/17
    VERSION: 0.1
    AUTHOR:  Andrew Davies
-   
+
 24/05/17 version 0.1: Original version
 
 Uses the SmartLCD library to write bitmap icons to the 8 custom characters and then
 prints them to the screen.
- 
 
-More information about the library can be found in the software section of our support 
+
+More information about the library can be found in the software section of our support
 forum here:
 
 http://forum.hobbycomponents.com/software
@@ -56,14 +56,14 @@ byte Ohmega[] =         {0x0,0x0E,0x11,0x11,0x11,0x0A,0x1B, 0x00};
 
 
 
-void setup() 
+void setup()
 {
   SmartLCD.init();                    //Initiliases the library
 
   SmartLCD.Clear();                   //Clear the screen
-  
+
   SmartLCD.Print("Custom graphics:"); //Print something
-  
+
   //Write the bitmap data to the 8 custom characters
   SmartLCD.DefCustChar(0, Battery);
   SmartLCD.DefCustChar(1, LeftArrow);
@@ -76,20 +76,20 @@ void setup()
 }
 
 
-void loop()                 
+void loop()
 {
   SmartLCD.CurPos(1, 4);            //Set the cursor to row 1 column 4
 
   //Print the 8 custom characters to the screen
-  SmartLCD.PrintCustChar(0);        
-  SmartLCD.PrintCustChar(1);        
+  SmartLCD.PrintCustChar(0);
+  SmartLCD.PrintCustChar(1);
   SmartLCD.PrintCustChar(2);
   SmartLCD.PrintCustChar(3);
   SmartLCD.PrintCustChar(4);
   SmartLCD.PrintCustChar(5);
   SmartLCD.PrintCustChar(6);
   SmartLCD.PrintCustChar(7);
-  
+
   while(1);                         //Do nothing
 }
 
