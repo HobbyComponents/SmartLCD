@@ -310,7 +310,7 @@ void SmartLCD::ClearButton(void)
 		NOTE_G			7
 		NOTE_GS			8
 		NOTE_A			9
-		NOTE_A#			10
+		NOTE_AS			10
 		NOTE_B			11
 		
 		Time is the duration of the note in 10ms increments (1 = 10ms to 255 = 2.55s)

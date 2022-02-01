@@ -63,7 +63,7 @@ REASON WHATSOEVER.
 #define NOTE_G			7
 #define NOTE_GS			8
 #define NOTE_A			9
-#define NOTE_A#			10
+#define NOTE_AS			10
 #define NOTE_B			11
 
 
