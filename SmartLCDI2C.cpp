@@ -93,7 +93,7 @@ void SmartLCD::PrintChar(char Character)
 /* Prints a string of ASCII text to the screen where:
 		String is an ASCII string with null terminator containing the text to print
 */
-void SmartLCD::Print(char *String)
+void SmartLCD::Print(const char *String)
 {
 	uint8_t i = 0;
 
@@ -240,7 +240,7 @@ void SmartLCD::PrintCustChar(uint8_t CharIndex)
 	Note after issuing this function you must reposition the cursor before printing any text
 	using the SmartLCD.CurPos(Row, Col) function.
 */
-void SmartLCD::DefCustChar(uint8_t CharIndex, uint8_t *Data)
+void SmartLCD::DefCustChar(uint8_t CharIndex, const uint8_t *Data)
 {
 	Wire.beginTransmission(_I2C_Add);
 	Wire.write(I2CDEFINECUSTOM);

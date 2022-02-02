@@ -81,7 +81,7 @@ class SmartLCD
 	SmartLCD(uint8_t I2C_Add);
 	void init(void);
 	void PrintChar(char Character);
-	void Print(char *String);
+	void Print(const char *String);
 	void Print(int Value);
 	void Clear(void);
 	void CurPos(uint8_t Row, uint8_t Col);
@@ -90,7 +90,7 @@ class SmartLCD
 	void CursorBlink(uint8_t State);
 	void Backlight(uint8_t Level);
 	void PrintCustChar(uint8_t CharIndex);
-	void DefCustChar(uint8_t CharIndex, uint8_t *Data);
+	void DefCustChar(uint8_t CharIndex, const uint8_t *Data);
 	void CursorDir(uint8_t Dir);
 	void I2CInit(void);
 	void ClearButton(void);
