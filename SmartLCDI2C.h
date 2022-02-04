@@ -3,15 +3,15 @@
    VERSION: 0.1
    AUTHOR:  Andrew Davies
    WEBSITE: HobbyComponents.com
-   
+
 12/07/17 version 0.1: Original version
 
 Arduino I2C library for the Hobby Components Smart LCD.
 Products currently supported by this library:
 
-Hobby Components 1602 Smart LCD (HCMODU0122) available from hobbycomponents.com 
+Hobby Components 1602 Smart LCD (HCMODU0122) available from hobbycomponents.com
 
-More information about this library can be found in the software section of our support 
+More information about this library can be found in the software section of our support
 forum here:
 
 http://forum.hobbycomponents.com/software
@@ -100,14 +100,14 @@ class SmartLCD
 	void Version(void);
 	void ClearError(void);
 	void WaitBar(uint8_t Row, uint8_t Col, uint8_t Length, uint8_t Percent);
-	
+
 	boolean Busy(void);
 	boolean Error(void);
 	boolean ButtonState(void);
 	uint8_t	Button(void);
 	uint8_t ReadADC(void);
 	uint8_t Status(void);
-	
+
 
 
   private:
