@@ -116,7 +116,7 @@ class SmartLCD
 
 
   private:
-	byte _I2C_Add;
+	uint8_t _I2C_Add;
 };
 
 #endif
