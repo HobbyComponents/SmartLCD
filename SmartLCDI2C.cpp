@@ -8,6 +8,7 @@
 04/02/22 version 0.2: 	Added new example (SmartLCD_Custom_Character_Example2) to show how to use existing public domain characters. Thanks to Håkon Løvdal.
 			Fixed issue that cause compiler error when passing a char array to some functions.  Thanks to Håkon Løvdal.
 			Fixed an invalid token name for note NOTE_AS.  Thanks to Håkon Løvdal.
+			Added type case to requestFrom to fix compiler error. Thanks to Håkon Løvdal.
 
 Arduino I2C library for the Hobby Components Smart LCD.
 Products currently supported by this library:
