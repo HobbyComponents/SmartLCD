@@ -1,6 +1,6 @@
 /* FILE:    SMARTLCDI2C.h
-   DATE:    04/02/22
-   VERSION: 0.2
+   DATE:    26/04/22
+   VERSION: 0.3
    AUTHOR:  Andrew Davies
    WEBSITE: HobbyComponents.com
 
@@ -9,6 +9,7 @@
 			Fixed issue that cause compiler error when passing a char array to some functions.  Thanks to Håkon Løvdal.
 			Fixed an invalid token name for note NOTE_AS.  Thanks to Håkon Løvdal.
 			Added type case to requestFrom to fix compiler error. Thanks to Håkon Løvdal.
+26/04/22 version 0.3:	Added option to print floating point numbers via the Print() function.
 			
 			
 
@@ -89,6 +90,7 @@ class SmartLCD
 	void PrintChar(char Character);
 	void Print(const char *String);
 	void Print(int Value);
+	void Print(float val, uint8_t dp = 0);
 	void Clear(void);
 	void CurPos(uint8_t Row, uint8_t Col);
 	void DispState(uint8_t State);
