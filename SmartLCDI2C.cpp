@@ -1,6 +1,6 @@
 /* FILE:    SMARTLCDI2C.cpp
-   DATE:    04/02/22
-   VERSION: 0.2
+   DATE:    26/04/22
+   VERSION: 0.3
    AUTHOR:  Andrew Davies
    WEBSITE: HobbyComponents.com
 
@@ -9,6 +9,7 @@
 			Fixed issue that cause compiler error when passing a char array to some functions.  Thanks to Håkon Løvdal.
 			Fixed an invalid token name for note NOTE_AS.  Thanks to Håkon Løvdal.
 			Added type case to requestFrom to fix compiler error. Thanks to Håkon Løvdal.
+26/04/22 version 0.3:	Added option to print floating point numbers via the Print() function.
 
 Arduino I2C library for the Hobby Components Smart LCD.
 Products currently supported by this library:
@@ -120,6 +121,24 @@ void SmartLCD::Print(int Value)
 	itoa(Value,buffer,10);
 	Print(buffer);
 }
+
+
+
+/* Prints a floating point number to the screen where:
+		val is the floating point number to print
+		dp is the number of decimal places to print to
+*/
+void SmartLCD::Print(float val, uint8_t dp = 0)
+{
+	char buffer[20];
+	if(dp > 10)
+		dp = 10;
+
+	dtostrf(val, 0, dp, buffer);
+	
+	Print(buffer);
+}
+
 
 
 
