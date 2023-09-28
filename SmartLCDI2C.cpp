@@ -1,15 +1,18 @@
 /* FILE:    SMARTLCDI2C.cpp
-   DATE:    26/04/22
-   VERSION: 0.3
+   DATE:    03/01/23
+   VERSION: 0.4
    AUTHOR:  Andrew Davies
    WEBSITE: HobbyComponents.com
 
 12/07/17 version 0.1: 	Original version
 04/02/22 version 0.2: 	Added new example (SmartLCD_Custom_Character_Example2) to show how to use existing public domain characters. Thanks to Håkon Løvdal.
-			Fixed issue that cause compiler error when passing a char array to some functions.  Thanks to Håkon Løvdal.
+			Fixed issue that caused a compiler error when passing a char array to some functions.  Thanks to Håkon Løvdal.
 			Fixed an invalid token name for note NOTE_AS.  Thanks to Håkon Løvdal.
 			Added type case to requestFrom to fix compiler error. Thanks to Håkon Løvdal.
 26/04/22 version 0.3:	Added option to print floating point numbers via the Print() function.
+03/01/23 version 0.4:	Added additional Print() function that allows row/col to be specified and also supports printing off screen
+						Added ScrollText() function that allows text to be horizontally scrolled
+
 
 Arduino I2C library for the Hobby Components Smart LCD.
 Products currently supported by this library:
@@ -75,7 +78,7 @@ SmartLCD::SmartLCD(uint8_t I2C_Add)
 /* Initialises the Arduino wire library - Nothing to set up for the LCD! */
 void SmartLCD::init(void)
 {
-	//Initiliase the I2C interface
+	//Initialise the I2C interface
 	Wire.begin();
 }
 
@@ -111,6 +114,37 @@ void SmartLCD::Print(const char *String)
 
 
 
+/* Prints a string of ASCII text to the screen where:
+		String is an ASCII string with null terminator containing the text to print
+		
+		Row is the text row number - valid values are -32767 to 32767
+
+		Col is the text column number - valid values are -32767 to 32767
+*/
+void SmartLCD::Print(const char *String, int16_t row, int16_t col)
+{
+	if(row >= 0 && row < 4)
+	{
+		int i = 0;
+
+		while(String[i] != '\0')
+		{
+			if((col + i) >= 0 && (col + i) < 20)
+			{
+				CurPos(row, col + i);
+				PrintChar(String[i]);
+			}
+			i++; 
+		}
+
+		// If last character printed was a negative col index then set the cursor
+		// to col 0 (needed for scrollText function to work properly)
+		if(col + i < 1)
+			CurPos(row, 0);
+	}
+}
+
+
 /* Prints a signed integer number to the screen where:
 		Value is the signed integer to print
 */
@@ -121,7 +155,6 @@ void SmartLCD::Print(int Value)
 	itoa(Value,buffer,10);
 	Print(buffer);
 }
-
 
 
 /* Prints a floating point number to the screen where:
@@ -140,6 +173,40 @@ void SmartLCD::Print(float val, uint8_t dp = 0)
 }
 
 
+
+/* scroll some text where:
+		String is an ASCII string with null terminator containing the text to print
+		Row is the text row number - valid values are -32767 to 32767
+
+		startCol is the start column to scroll from - valid values are -32767 to 32767
+		
+		endCol is the end column to scroll to - valid values are -32767 to 32767
+		
+		scrollDelay is the delay in ms between each step
+		
+	Note, if startCol < endCol text will scroll left to right, if startCol > endCol text will scroll right to left
+		
+*/
+void SmartLCD::ScrollText(const char *String, uint8_t row, int8_t startCol, int8_t endCol, uint16_t scrollDelay)
+{
+  int8_t dir = 1;
+  
+  if(endCol < startCol)
+    dir = -1;
+
+  for(int8_t col = startCol; col != endCol; col += dir)
+  {
+    if(col != startCol && dir == 1)
+      Print(" ", row, col - 1);
+      
+    Print(String, row, col);
+
+    if(col != startCol && dir == -1)
+      PrintChar(' ');
+    
+    delay(scrollDelay);
+  }
+}
 
 
 /* Clears the screen of any printed text and positions the cursor to row 0,

@@ -1,15 +1,17 @@
 /* FILE:    SMARTLCDI2C.h
-   DATE:    26/04/22
-   VERSION: 0.3
+   DATE:    03/01/23
+   VERSION: 0.4
    AUTHOR:  Andrew Davies
    WEBSITE: HobbyComponents.com
 
 12/07/17 version 0.1: 	Original version
 04/02/22 version 0.2: 	Added new example (SmartLCD_Custom_Character_Example2) to show how to use existing public domain characters. Thanks to Håkon Løvdal.
-			Fixed issue that cause compiler error when passing a char array to some functions.  Thanks to Håkon Løvdal.
+			Fixed issue that caused a compiler error when passing a char array to some functions.  Thanks to Håkon Løvdal.
 			Fixed an invalid token name for note NOTE_AS.  Thanks to Håkon Løvdal.
 			Added type case to requestFrom to fix compiler error. Thanks to Håkon Løvdal.
 26/04/22 version 0.3:	Added option to print floating point numbers via the Print() function.
+03/01/23 version 0.4:	Added additional Print() function that allows row/col to be specified and also supports printing off screen
+						Added ScrollText() function that allows text to be horizontally scrolled
 			
 			
 
@@ -89,8 +91,10 @@ class SmartLCD
 	void init(void);
 	void PrintChar(char Character);
 	void Print(const char *String);
+	void Print(const char *String, int16_t row, int16_t col);
 	void Print(int Value);
 	void Print(float val, uint8_t dp = 0);
+	void ScrollText(const char *String, uint8_t row, int8_t startCol, int8_t endCol, uint16_t scrollDelay);
 	void Clear(void);
 	void CurPos(uint8_t Row, uint8_t Col);
 	void DispState(uint8_t State);
